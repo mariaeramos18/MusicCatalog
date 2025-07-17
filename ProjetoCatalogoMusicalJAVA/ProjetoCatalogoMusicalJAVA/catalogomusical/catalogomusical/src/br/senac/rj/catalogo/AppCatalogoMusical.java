@@ -27,20 +27,20 @@ public class AppCatalogoMusical {
     private static JTable tabelaPlaylist;
 
     public static void apresentarMenu() {
-        JFrame janelaPrincipal = new JFrame("Catálogo Musical");
+        JFrame janelaPrincipal = new JFrame("Music Catalog");
         janelaPrincipal.setSize(700, 400);
         janelaPrincipal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         janelaPrincipal.setResizable(false);
 
-        UIManager.put("OptionPane.yesButtonText", "Sim");
-        UIManager.put("OptionPane.noButtonText", "Não");
+        UIManager.put("OptionPane.yesButtonText", "Yes");
+        UIManager.put("OptionPane.noButtonText", "No");
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu menuAtualizar = new JMenu("Gerenciar");
+        JMenu menuAtualizar = new JMenu("Update");
         menuBar.add(menuAtualizar);
 
-        JMenuItem menuArtista = new JMenuItem("Artista");
-        JMenuItem menuMusica = new JMenuItem("Música");
+        JMenuItem menuArtista = new JMenuItem("Artist");
+        JMenuItem menuMusica = new JMenuItem("Music");
         JMenuItem menuPlaylist = new JMenuItem("Playlist");
         menuAtualizar.add(menuArtista);
         menuAtualizar.add(menuMusica);
@@ -72,11 +72,11 @@ public class AppCatalogoMusical {
 
         tabelaMusica = criarTabelaMusica();
         JScrollPane scrollMusica = new JScrollPane(tabelaMusica);
-        abas.addTab("Músicas", scrollMusica);
+        abas.addTab("Music", scrollMusica);
 
         tabelaArtista = criarTabelaArtista();
         JScrollPane scrollArtista = new JScrollPane(tabelaArtista);
-        abas.addTab("Artistas", scrollArtista);
+        abas.addTab("Artists", scrollArtista);
 
         tabelaPlaylist = criarTabelaPlaylist();
         JScrollPane scrollPlaylist = new JScrollPane(tabelaPlaylist);
@@ -88,7 +88,7 @@ public class AppCatalogoMusical {
 
     // ---------- TABELA DE MÚSICAS ----------
     private static JTable criarTabelaMusica() {
-        String[] colunas = {"ID", "Título", "Duração", "Álbum", "Artista"};
+        String[] colunas = {"ID", "Title", "Duration", "Album", "Artist"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         JTable tabela = new JTable(modelo);
 
@@ -107,7 +107,7 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar músicas: " + e);
+            System.out.println("Error fetching songs: " + e);
         }
         
         // Adiciona o listener de mouse para abrir a janela de música com dados preenchidos
@@ -133,7 +133,7 @@ public class AppCatalogoMusical {
 
     // ---------- TABELA DE ARTISTAS ----------
     private static JTable criarTabelaArtista() {
-        String[] colunas = {"ID", "Nome", "Nacionalidade", "Gênero Musical", "Gênero"};
+        String[] colunas = {"ID", "Name", "Nationality", "Music genre", "Genre"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         JTable tabela = new JTable(modelo);
         
@@ -152,7 +152,7 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar artistas: " + e);
+            System.out.println("Error fetching artists: " + e);
         }
 
         // Adiciona o listener de mouse para abrir a janela de artista com dados preenchidos
@@ -178,7 +178,7 @@ public class AppCatalogoMusical {
 
     // ---------- TABELA DE PLAYLISTS ----------
     private static JTable criarTabelaPlaylist() {
-        String[] colunas = {"ID", "Nome", "Descrição", "Data Criação", "Estilo"};
+        String[] colunas = {"ID", "Name", "Description", "Creation date", "Music genre"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         JTable tabela = new JTable(modelo);
 
@@ -197,7 +197,7 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar playlists: " + e);
+            System.out.println("Error fetching playlists: " + e);
         }
 
         // Adiciona o listener de mouse para abrir a janela de playlist com dados preenchidos
@@ -230,7 +230,7 @@ public class AppCatalogoMusical {
 
     public static void atualizarTabelaMusica() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaMusica.getModel();
-        modelo.setRowCount(0); // Limpa a tabela
+        modelo.setRowCount(0); // Clean the table
 
         try (Connection con = Conexao.conectaBanco();
              Statement stmt = con.createStatement();
@@ -247,13 +247,13 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar tabela de músicas: " + e);
+            System.out.println("Error updating songs table: " + e);
         }
     }
 
     public static void atualizarTabelaArtista() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaArtista.getModel();
-        modelo.setRowCount(0); // Limpa a tabela
+        modelo.setRowCount(0); // Clean the table
 
         try (Connection con = Conexao.conectaBanco();
              Statement stmt = con.createStatement();
@@ -270,13 +270,13 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar tabela de artistas: " + e);
+            System.out.println("Error updating artists table: " + e);
         }
     }
 
     public static void atualizarTabelaPlaylist() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaPlaylist.getModel();
-        modelo.setRowCount(0); // Limpa a tabela
+        modelo.setRowCount(0); // Clean the table
 
         try (Connection con = Conexao.conectaBanco();
              Statement stmt = con.createStatement();
@@ -293,7 +293,7 @@ public class AppCatalogoMusical {
                 modelo.addRow(linha);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar tabela de playlists: " + e);
+            System.out.println("Error updating playlist table: " + e);
         }
     }
 }

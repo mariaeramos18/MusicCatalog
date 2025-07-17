@@ -18,7 +18,7 @@ public class JanelaPlaylist extends JFrame {
     private JButton botaoExcluir;
 
     public JanelaPlaylist() {
-        setTitle("Cadastro de Playlist");
+        setTitle("Playlist management");
         setSize(520, 330);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -31,32 +31,32 @@ public class JanelaPlaylist extends JFrame {
         txtId.setBounds(160, 30, 50, 20);
         add(txtId);
 
-        add(new JLabel("Nome:")).setBounds(30, 60, 100, 20);
+        add(new JLabel("Name:")).setBounds(30, 60, 100, 20);
         txtNome = new JTextField();
         txtNome.setBounds(160, 60, 200, 20);
         add(txtNome);
 
-        add(new JLabel("Descrição:")).setBounds(30, 90, 100, 20);
+        add(new JLabel("Description:")).setBounds(30, 90, 100, 20);
         txtDescricao = new JTextField();
         txtDescricao.setBounds(160, 90, 200, 20);
         add(txtDescricao);
 
-        add(new JLabel("Data de Criação:")).setBounds(30, 120, 120, 20);
+        add(new JLabel("Creation date:")).setBounds(30, 120, 120, 20);
         txtData = new JTextField();
         txtData.setBounds(160, 120, 100, 20);
         add(txtData);
 
-        add(new JLabel("Estilo:")).setBounds(30, 150, 100, 20);
+        add(new JLabel("Genre:")).setBounds(30, 150, 100, 20);
         txtEstilo = new JTextField();
         txtEstilo.setBounds(160, 150, 150, 20);
         add(txtEstilo);
 
         // Botões
-        botaoConsultar = new JButton("Consultar");
-        botaoGravar = new JButton("Cadastrar");
-        botaoAtualizar = new JButton("Atualizar");
-        botaoExcluir = new JButton("Excluir");
-        JButton botaoLimpar = new JButton("Limpar");
+        botaoConsultar = new JButton("Consult");
+        botaoGravar = new JButton("Register");
+        botaoAtualizar = new JButton("Refresh");
+        botaoExcluir = new JButton("Delete");
+        JButton botaoLimpar = new JButton("Clean");
 
         botaoConsultar.setBounds(320, 30, 120, 25);
         botaoGravar.setBounds(20, 220, 100, 30);
@@ -86,14 +86,14 @@ public class JanelaPlaylist extends JFrame {
                     habilitarCampos(true);
                     txtId.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Playlist não encontrada. Preencha os dados para cadastrar.");
+                    JOptionPane.showMessageDialog(this, "Playlist not found. Fill in the fields to register.");
                     configurarBotoes(true, false, false, true);
                     habilitarCampos(true);
                 }
                 botaoConsultar.setEnabled(false);
                 txtNome.requestFocus();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Informe um ID numérico válido.");
+                JOptionPane.showMessageDialog(this, "Invalid ID. Enter an integer.");
             }
         });
 
@@ -101,47 +101,47 @@ public class JanelaPlaylist extends JFrame {
             try {
                 int id = Integer.parseInt(txtId.getText());
                 if (playlist.cadastrarPlaylist(id, txtNome.getText(), txtDescricao.getText(), txtData.getText(), txtEstilo.getText())) {
-                    JOptionPane.showMessageDialog(this, "Playlist cadastrada com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Playlist successfully registered!");
                     
                     AppCatalogoMusical.atualizarTabelaPlaylist();
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar a playlist. Verifique se o ID já existe.");
+                    JOptionPane.showMessageDialog(this, "Failed to register song. Check that the ID already exists.");
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "ID inválido. Digite um número inteiro.");
+                JOptionPane.showMessageDialog(this, "Invalid ID. Enter an integer.");
             }
         });
 
         botaoAtualizar.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(this, "Confirmar atualização da playlist?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(this, "Confirm this playlist's registration?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 int id = Integer.parseInt(txtId.getText());
                 if (playlist.atualizarPlaylist(id, txtNome.getText(), txtDescricao.getText(), txtData.getText(), txtEstilo.getText())) {
-                    JOptionPane.showMessageDialog(this, "Playlist atualizada com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Playlist successfully registered!");
                     
                     AppCatalogoMusical.atualizarTabelaPlaylist();
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao atualizar a playlist.");
+                    JOptionPane.showMessageDialog(this, "Failed to update playlist.");
                 }
             }
         });
 
         botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esta playlist?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(this, "Can you confirm this playlist's exclusion?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 int id = Integer.parseInt(txtId.getText());
                 if (playlist.excluirPlaylist(id)) {
-                    JOptionPane.showMessageDialog(this, "Playlist excluída com sucesso.");
+                    JOptionPane.showMessageDialog(this, "Playlist successfully deleted!");
                     
                     AppCatalogoMusical.atualizarTabelaPlaylist();
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao excluir a playlist.");
+                    JOptionPane.showMessageDialog(this, "Failed to delete the playlist.");
                 }
             }
         });

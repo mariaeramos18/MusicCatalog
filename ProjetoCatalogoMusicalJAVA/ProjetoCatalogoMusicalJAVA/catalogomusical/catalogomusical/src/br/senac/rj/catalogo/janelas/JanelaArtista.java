@@ -18,7 +18,7 @@ public class JanelaArtista extends JFrame {
     private JButton botaoExcluir;
 
     public JanelaArtista() {
-        setTitle("Gerenciamento de Artistas");
+        setTitle("Artists management");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(500, 350);
@@ -32,32 +32,32 @@ public class JanelaArtista extends JFrame {
         jTextId.setBounds(200, 30, 50, 20);
         add(jTextId);
 
-        add(new JLabel("Nome:")).setBounds(30, 60, 100, 20);
+        add(new JLabel("Name:")).setBounds(30, 60, 100, 20);
         jTextNome = new JTextField();
         jTextNome.setBounds(200, 60, 200, 20);
         add(jTextNome);
         
-        add(new JLabel("Nacionalidade:")).setBounds(30, 90, 100, 20);
+        add(new JLabel("Nationality:")).setBounds(30, 90, 100, 20);
         jTextNacionalidade = new JTextField();
         jTextNacionalidade.setBounds(200, 90, 200, 20);
         add(jTextNacionalidade);
 
-        add(new JLabel("Gênero Musical:")).setBounds(30, 120, 150, 20);
+        add(new JLabel("Music genre:")).setBounds(30, 120, 150, 20);
         jTextGeneroMusical = new JTextField();
         jTextGeneroMusical.setBounds(200, 120, 200, 20);
         add(jTextGeneroMusical);
 
-        add(new JLabel("Gênero:")).setBounds(30, 150, 150, 20);
+        add(new JLabel("Genre:")).setBounds(30, 150, 150, 20);
         jTextGenero = new JTextField();
         jTextGenero.setBounds(200, 150, 200, 20);
         add(jTextGenero);
 
         // Botões
-        botaoConsultar = new JButton("Consultar");
-        botaoCadastrar = new JButton("Cadastrar");
-        botaoAtualizar = new JButton("Atualizar");
-        botaoExcluir = new JButton("Excluir");
-        JButton botaoLimpar = new JButton("Limpar");
+        botaoConsultar = new JButton("Consult");
+        botaoCadastrar = new JButton("Register");
+        botaoAtualizar = new JButton("Refresh");
+        botaoExcluir = new JButton("Delete");
+        JButton botaoLimpar = new JButton("Clean");
 
         botaoConsultar.setBounds(280, 30, 100, 20);
         botaoCadastrar.setBounds(30, 220, 100, 30);
@@ -87,7 +87,7 @@ public class JanelaArtista extends JFrame {
                     habilitarCampos(true);
                     jTextId.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Artista não encontrado. Preencha os dados para cadastrar.");
+                    JOptionPane.showMessageDialog(this, "Artist not found. Fill in the fields to register.");
                     limparCampos();
                     configurarBotoes(true, false, false, true);
                     habilitarCampos(true);
@@ -95,24 +95,24 @@ public class JanelaArtista extends JFrame {
                 botaoConsultar.setEnabled(false);
                 jTextNome.requestFocus();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "ID inválido. Digite um número inteiro.");
+                JOptionPane.showMessageDialog(this, "Invalid ID. Enter an integer.");
             }
         });
 
         botaoCadastrar.addActionListener(e -> {
             if (validarCampos()) {
-                int resposta = JOptionPane.showConfirmDialog(this, "Confirmar cadastro deste artista?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                int resposta = JOptionPane.showConfirmDialog(this, "Confirm this artist's registration?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     int id = Integer.parseInt(jTextId.getText());
                     if (artista.cadastrarArtista(id, jTextNome.getText(), jTextNacionalidade.getText(), jTextGeneroMusical.getText(), jTextGenero.getText())) {
-                        JOptionPane.showMessageDialog(this, "Artista cadastrado com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Artist successfully registered!");
                         
                         AppCatalogoMusical.atualizarTabelaArtista();
                         
                         dispose();
                         
                     } else {
-                        JOptionPane.showMessageDialog(this, "Falha ao cadastrar artista. Verifique se o ID já existe.");
+                        JOptionPane.showMessageDialog(this, "Failed to register artist. Check that the ID already exists.");
                     }
                 }
             }
@@ -120,34 +120,34 @@ public class JanelaArtista extends JFrame {
 
         botaoAtualizar.addActionListener(e -> {
             if (validarCampos()) {
-                int resposta = JOptionPane.showConfirmDialog(this, "Confirmar atualização deste artista?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                int resposta = JOptionPane.showConfirmDialog(this, "Can you confirm this artist's update?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     int id = Integer.parseInt(jTextId.getText());
                     if (artista.atualizarArtista(id, jTextNome.getText(), jTextNacionalidade.getText(), jTextGeneroMusical.getText(), jTextGenero.getText())) {
-                        JOptionPane.showMessageDialog(this, "Artista atualizado com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Artist successfully updated!");
                         
                         AppCatalogoMusical.atualizarTabelaArtista();
                         
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Falha ao atualizar artista.");
+                        JOptionPane.showMessageDialog(this, "Failed to update artist.");
                     }
                 }
             }
         });
 
         botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(this, "Confirmar exclusão deste artista?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(this, "Can you confirm this artist's exclusion?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 int id = Integer.parseInt(jTextId.getText());
                 if (artista.excluirArtista(id)) {
-                    JOptionPane.showMessageDialog(this, "Artista excluído com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Artist successfully deleted!");
                     
                     AppCatalogoMusical.atualizarTabelaArtista();
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao excluir artista.");
+                    JOptionPane.showMessageDialog(this, "Failed to delete the artist.");
                 }
             }
         });

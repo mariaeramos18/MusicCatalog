@@ -18,7 +18,7 @@ public class JanelaMusica extends JFrame {
     private JButton botaoExcluir;
 
     public JanelaMusica() {
-        setTitle("Gerenciamento de Musicas");
+        setTitle("Song management");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(500, 350);
@@ -28,10 +28,10 @@ public class JanelaMusica extends JFrame {
 
         // Labels
         JLabel labelId = new JLabel("ID:");
-        JLabel labelTitulo = new JLabel("Titulo:");
-        JLabel labelDuracao = new JLabel("Duração:");
-        JLabel labelAlbum = new JLabel("Álbum:");
-        JLabel labelArtista = new JLabel("Artista:");
+        JLabel labelTitulo = new JLabel("Title:");
+        JLabel labelDuracao = new JLabel("Duration:");
+        JLabel labelAlbum = new JLabel("Album:");
+        JLabel labelArtista = new JLabel("Artist:");
 
         labelId.setBounds(30, 30, 150, 20);
         labelTitulo.setBounds(30, 60, 100, 20);
@@ -53,11 +53,11 @@ public class JanelaMusica extends JFrame {
         jTextArtista.setBounds(200, 150, 200, 20);
 
         // Botões
-        botaoConsultar = new JButton("Consultar");
-        botaoCadastrar = new JButton("Cadastrar");
-        botaoAtualizar = new JButton("Atualizar");
-        botaoExcluir = new JButton("Excluir");
-        JButton botaoLimpar = new JButton("Limpar");
+        botaoConsultar = new JButton("Consult");
+        botaoCadastrar = new JButton("Register");
+        botaoAtualizar = new JButton("Refresh");
+        botaoExcluir = new JButton("Delete");
+        JButton botaoLimpar = new JButton("Clean");
 
         botaoConsultar.setBounds(280, 30, 100, 20);
         botaoCadastrar.setBounds(30, 220, 100, 30);
@@ -99,30 +99,30 @@ public class JanelaMusica extends JFrame {
                     habilitarCampos(true);
                     jTextId.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Música não encontrada. Preencha os dados para cadastrar.");
+                    JOptionPane.showMessageDialog(this, "Song not found. Fill in the fields to register.");
                     configurarBotoes(true, false, false, true);
                     habilitarCampos(true);
                 }
                 botaoConsultar.setEnabled(false);
                 jTextTitulo.requestFocus();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "ID inválido. Digite um número inteiro.");
+                JOptionPane.showMessageDialog(this, "Invalid ID. Enter an integer.");
             }
         });
 
         botaoCadastrar.addActionListener(e -> {
             if (validarCampos()) {
-                int resposta = JOptionPane.showConfirmDialog(this, "Confirmar cadastro desta música?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                int resposta = JOptionPane.showConfirmDialog(this, "Confirm this song's registration?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     int id = Integer.parseInt(jTextId.getText());
                     if (musica.cadastrarMusica(id, jTextTitulo.getText(), jTextDuracao.getText(), jTextAlbum.getText(), jTextArtista.getText())) {
-                        JOptionPane.showMessageDialog(this, "Música cadastrada com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Song successfully registered!");
                         
                         AppCatalogoMusical.atualizarTabelaMusica();
                         
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Falha ao cadastrar música. Verifique se o ID já existe.");
+                        JOptionPane.showMessageDialog(this, "Failed to register song. Check that the ID already exists.");
                     }
                 }
             }
@@ -130,34 +130,34 @@ public class JanelaMusica extends JFrame {
 
         botaoAtualizar.addActionListener(e -> {
             if (validarCampos()) {
-                int resposta = JOptionPane.showConfirmDialog(this, "Confirmar atualização desta música?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                int resposta = JOptionPane.showConfirmDialog(this, "Can you confirm this song's update?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     int id = Integer.parseInt(jTextId.getText());
                     if (musica.atualizarMusica(id, jTextTitulo.getText(), jTextDuracao.getText(), jTextAlbum.getText(), jTextArtista.getText())) {
-                        JOptionPane.showMessageDialog(this, "Música atualizada com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Song successfully updated!");
 
                         AppCatalogoMusical.atualizarTabelaMusica();
                         
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Falha ao atualizar música.");
+                        JOptionPane.showMessageDialog(this, "Failed to update song.");
                     }
                 }
             }
         });
 
         botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(this, "Confirmar exclusão desta música?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            int resposta = JOptionPane.showConfirmDialog(this, "Can you confirm this artist's exclusion?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 int id = Integer.parseInt(jTextId.getText());
                 if (musica.excluirMusica(id)) {
-                    JOptionPane.showMessageDialog(this, "Música excluída com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Artist successfully deleted!");
 
                     AppCatalogoMusical.atualizarTabelaMusica();
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao excluir música.");
+                    JOptionPane.showMessageDialog(this, "Failed to delete the song.");
                 }
             }
         });
