@@ -1,32 +1,41 @@
-🎵 Music Catalog – Java Swing + MySQL
-A desktop application developed in Java to manage Artists, Songs, and Playlists, featuring a graphical interface built with Swing and data persistence in MySQL via JDBC.
+# 🎵 Music Catalog – Java Swing + MySQL
 
-🖼️ Overview
+A desktop application developed in Java to manage **Artists**, **Songs**, and **Playlists**, featuring a graphical interface built with **Swing** and data persistence in **MySQL** via **JDBC**.
+
+## 🖼️ Overview
+
 Built as an academic project for the Programming I course (Senac RJ), this system demonstrates:
 
-Object‑Oriented Programming (OOP)
-Swing GUI development
-Database access via JDBC
-Modular code organization
-🚀 Features
-✅ Full CRUD (Create, Read, Update, Delete) for Artists, Songs & Playlists
-✅ Interactive tables (JTable) supporting double-click editing
-✅ Database connectivity using JDBC with a Singleton pattern
-✅ Automatic UI refresh after data changes
-✅ Input validation and confirmation dialogs for critical actions
-✅ Multiple panels managed via CardLayout / JTabbedPane
-📚 Technologies Used
-Java 17
-Swing (Java GUI Toolkit)
-JDBC (Java Database Connectivity)
-MySQL 8+
-IDE: IntelliJ IDEA / Eclipse / NetBeans
-📂 Project Structure
-src/ └── br/senac/rj/catalog/ ├── AppCatalog.java # Main application window ├── model/ │ ├── Artist.java │ ├── Song.java │ ├── Playlist.java │ └── ConnectionManager.java # Singleton JDBC connection ├── ui/ │ ├── ArtistPanel.java │ ├── SongPanel.java │ └── PlaylistPanel.java └── resources/ └── icons/ # (Optional) icons and images
+- Object‑Oriented Programming (OOP)
+- Swing GUI development
+- Database access via JDBC
+- Modular code organization
 
-yaml Copiar Editar
+---
 
-Technical Learning Outcomes Implemented a JDBC connection singleton for efficient database reuse
+## 🚀 Features
+
+- ✅ Full CRUD (Create, Read, Update, Delete) for Artists, Songs & Playlists  
+- ✅ Interactive tables (`JTable`) supporting double-click editing  
+- ✅ Database connectivity using JDBC with a Singleton pattern  
+- ✅ Automatic UI refresh after data changes  
+- ✅ Input validation and confirmation dialogs for critical actions  
+- ✅ Multiple panels managed via `CardLayout` / `JTabbedPane`
+
+---
+
+## 📚 Technologies Used
+
+- Java 21 
+- Swing (Java GUI Toolkit)  
+- JDBC (Java Database Connectivity)  
+- MySQL 8+  
+- IDE: Eclipse 
+
+
+
+🧠 Technical Learning Outcomes
+Implemented a JDBC connection singleton for efficient database reuse
 
 Enforced implicit MVC architecture through modular code separation
 
@@ -36,7 +45,8 @@ Dynamically handled data with JTable & DefaultTableModel
 
 Robust SQL exception handling with user-facing error messages
 
-📈 Future Improvements Adopt explicit DAO (Data Access Object) layer for better abstraction
+📈 Future Improvements
+Adopt explicit DAO (Data Access Object) layer for better abstraction
 
 Formalize full MVC or MVVM architecture
 
@@ -46,4 +56,6 @@ Export data to CSV or PDF formats
 
 Implement user authentication and role-based access
 
-👨‍🏫 Credits Academic project developed for Programming I at Senac RJ Instructor: Reinaldo Freitas
+👨‍🏫 Credits
+Academic project developed for Programming I at Senac RJ
+Instructor: Reinaldo Freitas
